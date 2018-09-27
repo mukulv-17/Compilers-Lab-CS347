@@ -1,0 +1,65 @@
+TODO: 
+_/ Use Macros for shorter code
+
+_/ comment extra NTs, then implement them later
+
+_/ Nope- Modify type_specifier to NT
+_/ role of patch_list, 
+-/ correctness of asm
+_/ Replace error messages
+_/ via Lex-	negative numbers
+	++ and -- support
+	a=5,b=5; support
+Commenting
+
+Known issues?
+	currently it exits immediately on one semantic error. Coz the node for 'error' NT is broken
+	dimlist is comma separated - just add the '][' token 
+	for loop support!
+	variable_dec is in statement as well
+	(fixed)_/ typo NOT case- $1 instead of $2
+	    $$->val = ($1->val+1)%2;
+
+
+
+ROUGH
+
+Global variables and their meanings-
+    Error flags-
+	    int flag = 0
+	    sem_flag=0
+	Scope level-
+	    level=0    
+    Memory offset-
+		offset
+
+    int label = 0 ;
+
+    vector<function> func_table;
+    vector<variable> global_var_table;
+    vector<int> dim_list;
+    function *active_func_ptr;
+    function call_name_ptr;
+    vector<val_type> args_list;
+    
+    vector<variable> patch_list;
+    	For bulk one-line declarations, also 
+	
+    param_offset;
+		Global, but recycled for local uses-
+
+    if(check_declared(active_func_ptr,global_var_table,level,A1->name)){ \
+		check name already declared in scope
+	
+	check_func_varlist 
+		redeclared withing function scope
+	
+	check_varlist
+		Any function or variable with that name
+
+	retrieve_declared
+		retrieve first from local function scope, then list of variables and functions in decreasing levels, then from active_func's params, then from global scope
+
+	clear_vars
+		free memory used by active function on end of compound statement
+

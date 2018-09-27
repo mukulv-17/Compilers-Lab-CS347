@@ -1,0 +1,10 @@
+int main (){
+	int a;
+	a=5;
+	bool b;
+	b=true;
+	char c;
+	c=a;
+
+	b=c;
+}

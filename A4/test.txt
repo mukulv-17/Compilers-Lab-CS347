@@ -1,0 +1,8 @@
+bool y;
+bool callfunc (int a, char c){
+	char b;
+}
+int main(){
+	int a;
+	y = callfunc(a,y);
+}

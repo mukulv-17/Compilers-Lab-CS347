@@ -1,0 +1,11 @@
+int g;
+int callfunc (int a){
+	return 1;
+}
+int main (){
+	int a;
+	a=5;
+	while(a=a-1){
+		callfunc(a);
+	}
+}

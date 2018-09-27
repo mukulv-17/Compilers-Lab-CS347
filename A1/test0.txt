@@ -1,0 +1,4 @@
+begin
+y := a+b*c+d;
+x := a+b*c+d*(e+f);
+end

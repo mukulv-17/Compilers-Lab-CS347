@@ -1,0 +1,11 @@
+begin
+if ( z < 5) then begin
+
+while (z<6) do
+z := (5=5);
+end
+
+end
+
+
+end

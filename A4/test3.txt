@@ -1,0 +1,4 @@
+int callfunc (int a){
+	return a;
+}
+int callfunc;

@@ -1,0 +1,164 @@
+
+; begin 
+
+;    t0 := _b 
+LXI H, 02C0H
+MOV A, M
+STA 02B0H
+
+;    t1 := _c 
+LXI H, 02C1H
+MOV A, M
+STA 02B1H
+
+;    t0 *= t1 
+LXI H, 02B0H
+MOV B, M
+LXI H, 02B1H
+MOV C, M
+MVI A, 00H
+ADD B
+DCR C
+JNZ 0018H
+LXI H, 02B0H
+MOV M, A
+
+;    t1 := _d 
+LXI H, 02C2H
+MOV A, M
+STA 02B1H
+
+;    t0 *= t1 
+LXI H, 02B0H
+MOV B, M
+LXI H, 02B1H
+MOV C, M
+MVI A, 00H
+ADD B
+DCR C
+JNZ 0032H
+LXI H, 02B0H
+MOV M, A
+
+;     _y := t0 
+LXI H, 02B0H
+MOV A, M
+STA 02C3H
+
+;    t0 := _a 
+LXI H, 02C4H
+MOV A, M
+STA 02B0H
+
+;    t1 := _b 
+LXI H, 02C0H
+MOV A, M
+STA 02B1H
+
+;    t0 += t1 
+LXI H, 02B1H
+MOV B, M
+LXI H, 02B0H
+MOV A, M
+ADD B
+STA 02B0H
+
+;    t1 := _c 
+LXI H, 02C1H
+MOV A, M
+STA 02B1H
+
+;    t0 += t1 
+LXI H, 02B1H
+MOV B, M
+LXI H, 02B0H
+MOV A, M
+ADD B
+STA 02B0H
+
+;     _y := t0 
+LXI H, 02B0H
+MOV A, M
+STA 02C3H
+
+;    t0 := _z 
+LXI H, 02C6H
+MOV A, M
+STA 02B0H
+
+;    t1 := 5 
+MVI A, 05H
+STA 02B1H
+
+;    t0 < t1 
+LXI H, 02B1H
+MOV B, M
+LXI H, 02B0H
+MOV A, M
+SUB B
+MVI A, 00H
+JP 0095H
+JZ 0095H
+MVI A, 01H
+STA 02B0H
+
+;     if ( t0 ) 
+LXI H, 02B0H
+MOV A, M
+ADI 00H
+JZ 00DBH
+
+;     then beginIf 
+
+;         begin 
+
+;             COND 
+
+;            t1 := _z 
+LXI H, 02C6H
+MOV A, M
+STA 02B1H
+
+;            t2 := 6 
+MVI A, 06H
+STA 02B2H
+
+;            t1 < t2 
+LXI H, 02B2H
+MOV B, M
+LXI H, 02B1H
+MOV A, M
+SUB B
+MVI A, 00H
+JP 00C0H
+JZ 00C0H
+MVI A, 01H
+STA 02B1H
+
+;             while ( t1 ) 
+LXI H, 02B1H
+MOV A, M
+ADI 00H
+JZ 00DBH
+
+;             do beginWhile 
+
+;                t2 := 5 
+MVI A, 05H
+STA 02B2H
+
+;                 _z := t2 
+LXI H, 02B2H
+MOV A, M
+STA 02C6H
+
+;             endWhile 
+JMP 00A1H
+
+
+;         end 
+
+;     endIf 
+
+; end 
+HLT

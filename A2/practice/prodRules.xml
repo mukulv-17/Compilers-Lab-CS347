@@ -1,0 +1,68 @@
+
+General
+ALPHA → a | b | c…| x | y | z
+SIGN → + | - | ε
+DIGITS → 0|1|2|3|4|5|6|7|8|9
+SIGNED_INT → SIGN INT
+INT → DIGITS INT | DIGITS 
+FLOAT → INT | SIGN INT . INT 
+STRING -> ALPHA STRING | ALPHA
+QSTRING → ”STRING” | ε
+CSTRING → ,”STRING” | ,name =“STRING” |,name = None | ε 
+
+
+Processor Class
+PROCESSOR → Processor(isa=”ISA”, clock_speed : FLOAT, l1_memory=L1 PTEMP);
+ISA → ARM | AMD | CDC | MIPS
+L1 → id | MEMORY
+PTEMP → ,l2_memory=L1 CSTRING | ,l2_memory=None CSTRING | CSTRING
+
+Member Functions
+ID_ARRAY → id,ID_ARRAY | id
+IS_RUNNING → id.is_running();
+SUBMIT_JOBS → submit_jobs(ID_ARRAY);
+GCS → id.get_clock_speed(); //GCS=Get Clock Speed
+RUN → id.run(ID_ARRAY);
+DJ → id.discard_job(id);//DJ=discard job
+
+
+Link Class
+LINK → Link(start_point=QSTRING, end_point=QSTRING, bandwidth=FLOAT, FLOAT                                  
+      	  CSTRING);
+   
+Memory Class
+MEMORY → Memory(memory_type=MEM_TYPE, mem_size=INT CSTRING);
+MEM_TYPE → primary | secondary | cache	
+	
+Member Functions
+GAV → id.get_available_memory();
+
+
+Job Class
+JOB → Job(job_id=INT, flops_required=FLOAT, deadline=FLOAT, mem_required=INT, affinity=AF);
+AF → id |  [float, float, float, float]
+
+
+Member Functions
+GM → id.get_memory(); //GM=get memory
+
+Cluster Class
+CLUSTER → Cluster(processors=CLUSTER_ARRAY, topology=QSTRING, link_bandwidth=FLOAT,            
+link_capacity=FLOAT CSTRING);
+CLUSTER_ARRAY = id | [FLOAT_ARRAY]
+FLOAT_ARRAY → FLOAT , FLOAT_ARRAY | FLOAT  
+
+//small or big features-
+Support for Not passing args, or passing arg=None
+
+For process scheduling 
+affinity(float array)(an array of floats indicating how efficiently the job executes on processors having different instruction set. The order of processors will be AMD,CDC,MIPS,DEC)
+
+
+
+Test:
+using following terms shud give error-
+0.0.is_running()
+
+
+Each of above inside quotes shud get passed
